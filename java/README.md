@@ -2,8 +2,7 @@
 
 # Client library downloads
 
-Visit [Downloads and Samples](/my-business/samples) to get the latest client
-libraries.
+Visit the [Google My Business Developer Site](https://developers.google.com/my-business) to get the latest client libraries.
 
 # Add the library to an Eclipse project
 
@@ -17,10 +16,9 @@ file to add.
 
 # Get your client secrets
 
-**Note**: You will need to have created a [Client ID]({{basicsetup}}#request-client-id) before proceeding.
+**Note**: You will need to have created a Client ID in your [Google Cloud Platform](https://cloud.google.com/console) before proceeding.
 
 <ol>
-{% include "_shared/apis/console/_navigate-to-credentials.html" %}
 <li>Click the name of a Client ID to view that ID.</li>
 <li>Click <b>Download JSON</b>.</li>
 <li>Create a new file called <code>client_secrets.json</code> in the directory <code>src/main/resources/</code>, and add
@@ -29,12 +27,7 @@ the contents of the JSON file you downloaded in the previous step.</li>
 
 # Implement the OAuth 2.0 authorization flow
 
-This example demonstrates using the [AuthorizationCodeFlow]({{authflow}}) class
-to allow the application to access Google My Business account data. All of the
-code here is taken from the {{api_name}}
-[Java client sample application](/my-business/samples), and follows the scenario
-described in
-[Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp).
+This example demonstrates using the `AuthorizationCodeFlow` class to allow the application to access Google My Business account data. Additional may be found in [Using OAuth 2.0 for Installed Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp).
 
 In the following code example:
 

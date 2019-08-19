@@ -1,7 +1,7 @@
 
 # Configure the sample
 
-Replace `YOUR_CLIENT_ID_HERE` and `YOUR_API_KEY_HERE` with a valid Client ID and API Key obtained from your Google Cloud Project.
+Replace `YOUR_CLIENT_ID_HERE` and `YOUR_API_KEY_HERE` with a valid Client ID and API Key obtained from your [Google Cloud Platform](https://cloud.google.com/console) API project.
 
 WARNING: This presents a significant security risk as the Client ID and API Key are shared with and visibile in the client's browser. This code should never be used in a production environment without first ensuring credentials are removed and properly secured through the use of a server side JS run-time environment or other means.
 
