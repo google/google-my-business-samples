@@ -18,7 +18,7 @@ Python 3.x
 
 Load the following URL into your browser:
 
-`http://localhost:8000/quickstart.html`
+`http://localhost:8000/gmbdemo.html`
 
 The first time you run the sample, it prompts you to authorize access:
 

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--
+    Copyright 2019 Google LLC
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Google My Business Minimum Viable Platform Demo</title>
+  <link rel="stylesheet" href="gmbdemo.css">
+</head>
+
+<body>
+  <div class="section"> Google My Business API Minimum Viable Product Demo </div>
+  <div class="verbage">
+    <dl>
+    <dt>This demonstration illustrates how to</dt>
+    <dd>perform OAuth 2.0 authorization to access the Google My Business API</dd>
+    <dd>fetch categories and attributes for individual regions and languages.</dd>
+    <dd>list the available Accounts</dd>
+    <dd>list the Locations within an account</dd>
+    <dd>create a Location in the specified Account and Location Group</dd>
+    <dd>verify the Location and transfer ownership of the new Location to
+        the merchant.</dd>
+    </dl>
+    The API Key and OAuth 2.0 Client ID values from your Google Cloud
+    Project - Google APIs & Services menu must be added to the
+    JavaScript source for this page.
+    <br>
+    <b>Note</b> this code should not be used in production as the OAuth
+    credentials are directly exposed and transmitted to the user's browser.
+  </div>
+
+  <h1 id="oauth-banner">Please confirm your API credentials and
+    successful OAuth authorization.</h1>
+
+  <div style='display:flex; flex-direction:column; width:50%; float:left'>
+
+    <div>
+      <div class="section"> OAuth Consent </div>
+      <div class="verbage">
+        Trigger one-time OAuth consent, obtain a Refresh token and use
+        it to fetch an Access token used in calls to API methods as described
+        by <a href='https://developers.google.com/identity/protocols/OAuth2'>Using OAuth 2.0 to Access Google APIs</a>
+      </div>
+      <div>
+        <button id="authorize-button" onclick="handleAuthClick()"> OAuth2 Authorize </button>
+        <button id="signout-button" onclick="handleSignoutClick()"> OAuth2 Sign Out </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section"> Categories </div>
+      <div>
+        <form id="category-form">
+          <label for="regionCode"> regionCode </label>
+            <input id="regionCode" name="regionCode" value="GR">
+          <label for="languageCode"> languageCode </label>
+            <input id="languageCode" name="languageCode" value="el">
+          <label for="searchTerm"> searchTerm </label>
+            <input id="searchTerm" name="searchTerm" value="Διοργάνωση">
+          <label for="catPageSize"> pageSize </label>
+            <input id="catPageSize" name="catPageSize" value="3">
+          <label for="catPageToken"> pageToken </label>
+            <input id="catPageToken" name="catPageToken" value="">
+        </form>
+      </div>
+      <div>
+        <button id="categories-button" onclick="handleCategoriesClick()"> Get Categories </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section"> Attributes</div>
+      <div class="verbage">
+        Available attributes vary by category, country and language.
+        The categoryId value can be found in the <i>categoryId</i> field of a
+        <b>Get Categories</b> response.
+      </div>
+      <div>
+        <form id="attribute-form">
+          <label for="categoryId"> categoryId </label>
+            <input id="categoryId" name="categoryId" value="gcid:party_planner">
+          <label for="attrPageSize"> pageSize </label>
+            <input id="attrPageSize" name="attrPageSize" value="3">
+          <label for="attrPageToken"> pageToken </label>
+            <input id="attrPageToken" name="attrPageToken" value="">
+        </form>
+      </div>
+      <div>
+        <button id="attributes-button" onclick="handleAttributesClick()"> Get Attributes </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section"> Accounts </div>
+      <div>
+        <button id="accounts-button" onclick="handleAccountsClick()"> Get Accounts </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section"> Account Admins and Locations </div>
+      <div class="verbage">
+        These commands operate on an individual account name.
+        The name value can be found in the <i>locations.name</i> field of
+        a <b>Get Accounts</b> response.
+      </div>
+      <div>
+        <form id='accounts-form'>
+          <label for='accountName'> name </label>
+            <input id='accountName' name='accountName'
+            value='accounts/116981476297479439039'>
+        </form>
+      </div>
+      <div>
+        <button id="admins-button" onclick="handleAdminsClick()"> Get Account Admins </button>
+        <button id="locations-button" onclick="handleLocationsClick()"> Get Locations </button>
+      </div>
+    </div>
+
+    <div>
+      <div class="section"> Locations </div>
+
+      <div class="verbage">
+        The Google Location Search method criteria may be specified using a query string or a location object. When searching with a candidate Location object the <i>locationName</i> and optional <i>postalAddress, websiteUrl, primaryPhone</i> fields may be used.
+      </div>
+
+      <div>
+        <form id="search-form" style="float:left">
+          <label for="query"> query string </label>
+            <input id="query" name="query" value="Blinds Athens, Greece">
+          <label for="resultCount"> resultCount </label>
+            <input id="resultCount" name="resultCount" value="50">
+        </form>
+      </div>
+      <div>
+        <button id="query-search-button" onclick="handleQuerySearchClick()"> Query Search </button>
+        <button id="location-search-button" onclick="handleLocationSearchClick()"> Location Search </button>
+      </div>
+
+      <div class="verbage">
+        New Locations may be created under the account specified in the
+        <i>name</i> field in the Account Admins and Locations section.
+        <br><br>
+        Unknown addresses may require latitude and longitude to be entered. This example uses a ficticious address and failing to specify LatLng will result in an error response. Google will automatically match the Postal Address to known LatLng values if available. Unless prompted, LatLng should be left blank by default.
+        <br><br>
+        The business type may be physical storefront, service area,
+        or a hybrid of both types.<br>
+        For businesses which include a service area a Google Maps
+        <a href='https://developers.google.com/places/supported_types#table3'>
+          regions</a> type is included to define the boundary.<br>
+        Specifying a service area region or dropping a pin to
+        <a href='https://en.wikipedia.org/wiki/Geocoding'>geocode</a> may be
+        performed using the
+        <a href='https://developers.google.com/maps/documentation/javascript/reference/places-widget#Autocomplete'>Google Maps Autocomplete Widget</a>
+        as seen here:
+      </div>
+
+      <div>
+        <form id='location-form'>
+          <label for='storeCode'> storeCode </label>
+          <input  id='storeCode' name='storeCode' value='314159265359'>
+          <label for='locationName'> locationName </label>
+          <input  id='locationName' name='locationName' value='αχαρνές διευκρίνιση'>
+          <label for='primaryPhone'> primaryPhone </label>
+          <input  id='primaryPhone' name='primaryPhone' value=''>
+          <label for='websiteUrl'> websiteUrl </label>
+          <input  id='websiteUrl' name='websiteUrl' value='example.com'>
+          <label for='validateOnly'> validateOnly </label>
+          <input  id='validateOnly' name='validateOnly' value='True'>
+          <label for='requestId'> requestId </label>
+          <input  id='requestId' name='requestId' value='161803398875'>
+          <!-- PostalAddress object -->
+          <label id='postalAddress' style='font-weight:bold'> Postal Address </label>
+          <label for='addressLines'> addressLines </label>
+          <input  id='addressLines' name='addressLines' value='1 Wayback Road'>
+          <label for='locality'> locality </label>
+          <input  id='locality' name='locality' value='Athens'>
+          <label for='postalCode'> postalCode </label>
+          <input  id='postalCode' name='postalCode' value='151 24'>
+          <label for='administrativeArea'> administrativeArea </label>
+          <input  id='administrativeArea' name='administrativeArea' value=''>
+          <!-- LatLng object -->
+          <label id='LatLng' style='font-weight:bold'> LatLng </label>
+          <label for='latitude'> latitude </label>
+          <input  id='latitude' name='latitude' value='37.98'>
+          <label for='longitude'> longitude </label>
+          <input  id='longitude' name='longitude' value='23.73'>
+          <!-- serviceArea object -->
+          <label id='serviceArea' style='font-weight:bold'> serviceArea </label>
+          <label for='businessType'> businessType </label>
+          <input  id='businessType' name='businessType' value='CUSTOMER_AND_BUSINESS_LOCATION'>
+          <label for='name'> name </label>
+          <input  id='name' name='name' value='Athens, Greece'>
+          <label for='placeId'> service region place Id </label>
+          <input  id='placeId' name='placeId' value='ChIJ8UNwBh-9oRQR3Y1mdkU1Nic'>
+        </form>
+      </div>
+      <div>
+        <button id="create-button" onclick="handleCreateLocationClick()"> Create Location </button>
+      </div>
+
+      <div id="map"></div>
+      <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+      <div id="infowindow-content">
+        <span id="place-name"  class="title"></span><br><br>
+        <strong>Place ID</strong>: <span id="place-id"></span><br>
+        <strong>Lat/Lng</strong>: <span id="latlng"></span><br>
+        <strong>Address</strong>:<br> <span id="place-address"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style='display:flex; flex-direction:column; width:50%; float:right'>
+    <div class="section"> API Request </div>
+    <pre id="request-area"></pre>
+    <div class="section"> API Response </div>
+    <pre id="response-area"></pre>
+  </div>
+
+  <script src="gmbdemo.js"></script>
+  <script src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()">
+  </script>
+
+  <!--
+            *** BEGIN USER SPECIFIED SETTINGS ***
+  -->
+  <script>
+    // Enter an API key from the Google API Console:
+    //   https://console.developers.google.com/apis/credentials
+    var apiKey = 'YOUR_API_KEY_HERE';
+
+    // Enter a client ID for a web application from the Google API Console:
+    //   https://console.developers.google.com/apis/credentials?project=_
+    // In your API Console project, add a JavaScript origin that corresponds
+    // to the domain where you will be running the script.
+    var clientId = 'YOUR_CLIENT_ID_HERE';
+    // Use the latest Google My Business API version
+    var gmb_api_version = 'https://mybusiness.googleapis.com/v4';
+
+    // One or more authorization scopes. Additional scopes may be desired if
+    // multiple APIs are used. Refer to the documentation for the API
+    // or https://developers.google.com/people/v1/how-tos/authorizing
+    // At a minimum, include the Google My Business authorization scope.
+    var scopes = 'https://www.googleapis.com/auth/business.manage';
+  </script>
+  <script
+    // Replace the value of the 'key' parameter with your own API key.
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places&callback=initMap">
+  </script>
+  <!--
+            *** END OF USER SPECIFIED SETTINGS ***
+  -->
+
+</body>
+</html>
