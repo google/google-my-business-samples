@@ -14,6 +14,9 @@
 #    limitations under the License.
 #
 
+import sys
+import json
+
 from googleapiclient import sample_tools
 from googleapiclient.http import build_http
 

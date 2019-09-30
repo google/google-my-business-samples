@@ -1,0 +1,6 @@
+# credentials/token
+client_secrets.json
+*.dat
+
+# Others
+gmb_discovery.json
