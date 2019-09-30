@@ -16,9 +16,15 @@ JSON from your Google Cloud Project API Console.
 
 # Download the discovery document
 
-Go to the [Samples page](https://developers.google.com/my-business/samples/#discovery_document), right click **Download discovery document**, and select **Save Link As**. Then, save the file as `myBusiness_discovery.json` in the same directory as your Python file.
+Go to the [Samples page](https://developers.google.com/my-business/samples/#discovery_document), right click **Download discovery document**, and select **Save Link As**. Then, save the file as `gmb_discovery.json` in the same directory as your Python file.
 
 # Run the sample
 
-Use the built in `sample_tools` utility of the Google APIs Python client to build an API service from the discovery document that you downloaded, and authenticate the user with OAuth. You should now be able to list accounts and locations.
+The samples in this directory uses the built in `sample_tools` utility of the Google APIs Python client to build an API service from the discovery document that you downloaded, and authenticate the user with OAuth. 
+
+Execute the list accounts sample 
+
+`$ python list-accounts.py`
+
+You should now be able to list accounts and locations.
 
