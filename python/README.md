@@ -24,7 +24,7 @@ The samples in this directory uses the built in `sample_tools` utility of the Go
 
 Execute the list accounts sample 
 
-`$ python list-accounts.py`
+`$ python accounts-list.py`
 
 You should now be able to list accounts and locations.
 
