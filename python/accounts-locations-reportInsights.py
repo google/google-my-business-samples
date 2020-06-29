@@ -54,23 +54,38 @@ def main(argv):
     print("Found " + str(len(locationsList["locations"])) + " locations")
 
     # Choose one location to work with. Change index below as needed
-    locInd = 1
+    locInd = 5
     randomLocation = locationsList["locations"][locInd]["name"]
     randomLocationName = locationsList["locations"][locInd]["locationName"]
 
     print("Choosing location: " + randomLocationName)
 
-    verifyBody = {
-        "method": "PHONE_CALL",
-        "languageCode": "en",
-        "phoneInput": {
-            "phoneNumber": "+61 2 8084 6690"
+    insightsBody = {
+        "locationNames": [randomLocation],
+        "basicRequest": {
+            "metricRequests": [{
+                "metric": "PHOTOS_VIEWS_CUSTOMERS",
+                "options": ["AGGREGATED_TOTAL"]
+            }, {
+                "metric": "ACTIONS_PHONE",
+                "options": ["AGGREGATED_TOTAL"]
+            }, {
+                "metric": "VIEWS_SEARCH",
+                "options": ["AGGREGATED_TOTAL"]
+            }, {
+                "metric": "LOCAL_POST_ACTIONS_CALL_TO_ACTION",
+                "options": ["AGGREGATED_TOTAL"]
+            }],
+            "timeRange": {
+                "startTime": "2020-02-26T15:01:23.045123456Z",
+                "endTime": "2020-03-03T23:01:23.045123456Z"
+            }
         }
     }
 
-    # Call verify
-    output = service.accounts().locations().verify(name=randomLocation,
-                                                   body=verifyBody).execute()
+    # Call
+    output = service.accounts().locations().reportInsights(
+        name=randomAccount, body=insightsBody).execute()
     print(json.dumps(output, indent=2))
 
 
