@@ -2,17 +2,7 @@
 
 # Client library downloads
 
-Visit the [Google My Business Developer Site](https://developers.google.com/my-business) to get the latest client libraries.
-
-# Add the library to an Eclipse project
-
-1. Open your project in Eclipse.
-1. In Package Explorer, right-click a project and select **Build Path**, then
-click **Configure Build Path**.
-1. Click **Add External JARs** and navigate to the folder containing the JAR
-file to add.
-1. Select the JAR file and click **Open**.
-1. Click **OK** to add the file to the project's build path.
+Visit the [Google My Business Developer Site](https://developers.google.com/my-business) to get the latest client libraries. If required, you can manually download [OAuth](https://search.maven.org/search?q=g:com.google.oauth-client) and [java client](https://developers.google.com/api-client-library/java/google-api-java-client/download) libraries.
 
 # Get your client secrets
 
@@ -21,9 +11,21 @@ file to add.
 <ol>
 <li>Click the name of a Client ID to view that ID.</li>
 <li>Click <b>Download JSON</b>.</li>
-<li>Create a new file called <code>client_secrets.json</code> in the directory <code>src/main/resources/</code>, and add
-the contents of the JSON file you downloaded in the previous step.</li>
+<li>Create a new file called <code>client_secrets.json</code> in the same directory as source files.
 </ol>
+
+
+# Add the library to an Eclipse project
+
+1. Open your project in Eclipse.
+1. In Package Explorer, right-click a project and select **Build Path**, then
+click **Configure Build Path**.
+1. Click **Add External JARs** and navigate to the folder containing the JAR
+files to add.
+1. Select the JAR file and click **Open**.
+1. Click **OK** to add the file to the project's build path.
+
+
 
 # Implement the OAuth 2.0 authorization flow
 
