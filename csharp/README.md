@@ -19,7 +19,7 @@ pip install python-gflags
 
 ## Generate VS solution
 
-The following steps will generate the VS project file
+Execute the following steps in a new powershell to generate the VS project
 
 - `git clone https://github.com/googleapis/google-api-dotnet-client`
 - Remove existing discovery files `rm DiscoveryJson/*`. Place here the discovery file from [devsite](https://developers.google.com/my-business) and set revision tag to a current date e.g. `"revision": "20201210"`
