@@ -46,23 +46,22 @@ public class LocationsAdminsCreate
         var service = new MyBusinessService(new BaseClientService.Initializer() { HttpClientInitializer = userCredential });
         service.HttpClient.DefaultRequestHeaders.Add("X-GOOG-API-FORMAT-VERSION", "2");
         var accountsListResponse = service.Accounts.List().Execute();
-        Console.WriteLine("Choosing account: " + JsonConvert.SerializeObject(accountsListResponse.Accounts[9]));
+        Console.WriteLine("\nChoosing account: " + JsonConvert.SerializeObject(accountsListResponse.Accounts[9]));
 
         var account = accountsListResponse.Accounts[9];
         var locationListResponse = service.Accounts.Locations.List(account.Name).Execute();
-        Console.WriteLine("\n\nChoosing location: " + JsonConvert.SerializeObject(locationListResponse.Locations[0]));
+        Console.WriteLine("\nChoosing location: " + locationListResponse.Locations[0].Name);
 
         var location = locationListResponse.Locations[0];
-        var admin = new Google.Apis.MyBusiness.v4.Data.Admin();
-        admin.Name = location.Name;
-        admin.AdminName = "xyzhh@gml.com";
-        admin.Role = "MANAGER";
-        Console.WriteLine("\n\nCreated Admin Object " + JsonConvert.SerializeObject(admin));
-        Console.WriteLine("\n\nInviting manager for location: " + location.Name);
+        var admin = new Google.Apis.MyBusiness.v4.Data.Admin
+        {
+            AdminName = "xyzhh@gml.com",
+            Role = "MANAGER"
+        };
+        Console.WriteLine("\nCreated Admin Object " + JsonConvert.SerializeObject(admin));
         var locationsAdminsCreateRequest = service.Accounts.Locations.Admins.Create(admin, location.Name);
-        Console.WriteLine("\n\nRequest: " + JsonConvert.SerializeObject(locationsAdminsCreateRequest));
         var locationsAdminsCreateResponse = locationsAdminsCreateRequest.Execute();
-        Console.WriteLine("\n\nResponse: " + JsonConvert.SerializeObject(locationsAdminsCreateResponse));
+        Console.WriteLine("\nResponse: " + JsonConvert.SerializeObject(locationsAdminsCreateResponse));
     }
 
 }
