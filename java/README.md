@@ -1,9 +1,10 @@
 
 # Client libraries
 
-- [Account Management API](https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-mybusinessaccountmanagement/v1) and [library referfence](https://googleapis.dev/java/google-api-services-mybusinessaccountmanagement/latest/index.html)
+- [Account Management API](https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-mybusinessaccountmanagement/v1) and [library reference](https://googleapis.dev/java/google-api-services-mybusinessaccountmanagement/latest/index.html)
 
-# Get your client secrets
+# Prerequisites
+## Get your client secrets
 
 **Note**: You will need to have created a Client ID in your [Google Cloud Platform](https://cloud.google.com/console) before proceeding.
 
@@ -15,7 +16,7 @@
 The following steps were tested in Eclipse.
 
 - Install the buildship gradle integration plugin in Eclipse.
-- Create a gradle project and add the below dependecies to build.gradle. 
+- Create a gradle project and add the below dependencies to build.gradle. 
 ```
 dependencies {
     compile 'com.google.apis:google-api-services-mybusinessaccountmanagement:v1-rev20210217-1.31.0'
