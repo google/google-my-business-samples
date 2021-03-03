@@ -9,3 +9,16 @@
 
 - Click the name of a Client ID to view that ID and download JSON</li>
 - Create a new file called `client_secrets.json` in the same directory as source files.
+- For testing purposes, set the authorised redirect uri as `http://127.0.0.1/authorize/`
+
+
+# Build and Run
+
+The following steps were tested in Visual Studio with .NET framework installed
+
+- Under Nuget Package manager, search and install the following
+```
+Google.Apis.MyBusinessAccountManagemen
+Google.Apis.Auth
+```
+- Add the sample source, build and run
