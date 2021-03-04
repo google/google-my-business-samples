@@ -3,6 +3,8 @@
 
 - [Account Management API](https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-mybusinessaccountmanagement/v1) and [library reference](https://googleapis.dev/java/google-api-services-mybusinessaccountmanagement/latest/index.html)
 
+<!--
+
 # Prerequisites
 ## Get your client secrets
 
@@ -29,3 +31,4 @@ dependencies {
 - Double click build under Gradle Tasks.
 - Right click the java file > Run As > Java Application
 
+-->

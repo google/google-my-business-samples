@@ -6,3 +6,6 @@ client_secrets.json
 gmb_discovery.json
 mybusiness/
 myenv/
+bin/
+vendor/
+composer*

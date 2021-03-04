@@ -1,7 +1,11 @@
 
 # Client libraries
 
-Execute the following to install the client. The repository is available [here](https://github.com/googleapis/google-api-python-client).
+The client library repository is available [here](https://github.com/googleapis/google-api-python-client).
+
+<!--
+
+Execute the following to install the client library. The repository is available [here](https://github.com/googleapis/google-api-python-client).
 
 ```
 pip install virtualenv
@@ -10,7 +14,6 @@ source myenv/bin/activate
 myenv/bin/pip install google-api-python-client oauth2client
 ```
 
-- [Account Management API](https://github.com/googleapis/google-api-java-client-services/tree/master/clients/google-api-services-mybusinessaccountmanagement/v1) and [library reference](https://googleapis.dev/java/google-api-services-mybusinessaccountmanagement/latest/index.html)
 
 # Prerequisites
 ## Get your client secrets
@@ -29,4 +32,6 @@ Execute the list accounts sample in your virtualenv
 `$ python accounts_list.py`
 
 You should now be able to list accounts and locations.
+
+-->
 
