@@ -8,3 +8,5 @@ Business API](https://developers.google.com/my-business/) and related products l
 Samples are provided in a number of different programming languages broken out
 by directory.
 
+For support, take a look at the support options available in the [devsite](https://developers.google.com/my-business/content/support).
+
