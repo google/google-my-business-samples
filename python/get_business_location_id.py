@@ -49,12 +49,12 @@ def main(argv):
         request = MyBusinessAccount.accounts().list()
 
         # Execute the request and print the result
-        result = request.execute()
-        print("result:")
-        print(result)
-        account = result['accounts'][0]['name']
-        print("account:")
-        print(account)
+        accounts_result = request.execute()
+        print("accounts_result:")
+        print(accounts_result)
+        account_resource_name = accounts_result['accounts'][0]['name']
+        print("account_resource_name:")
+        print(account_resource_name)
 
         '''
         Step 3 - Get the business information using the Business Information API
@@ -70,19 +70,20 @@ def main(argv):
 
         # Build the request to accounts.locations using list method
         request = MyBusinessInformation.accounts().locations().list(
-            parent=account,
+            parent=account_resource_name,
             readMask=fields_we_want
             )
 
         # Execute the request and print the result
-        result = request.execute()
-        print("result:")
-        print(result)
+        locations_result = request.execute()
+        print("locations_result:")
+        print(locations_result)
 
         # Get the business_location_id
-        business_location_id = result['locations'][0]['name'].split('/')[1]
-        print("business_location_id:")
-        print(business_location_id)
+        if locations_result:
+            business_location_id = locations_result['locations'][0]['name'].split('/')[1]
+            print("business_location_id:")
+            print(business_location_id)
 
         return business_location_id
 
