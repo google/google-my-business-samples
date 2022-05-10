@@ -52,6 +52,6 @@ if (!$client->getAccessToken()) { // auth call
 
 
 $list_accounts_response = $my_business_account->accounts->listAccounts();
-Var_dump($list_accounts_response);
+var_dump($list_accounts_response);
 
 ?>
