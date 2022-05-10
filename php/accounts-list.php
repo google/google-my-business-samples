@@ -17,6 +17,7 @@
 
 include_once __DIR__ . '/vendor/autoload.php';
 
+session_start();
 
 $credentials = __DIR__ . '/client_secrets.json';
 
